@@ -1,20 +1,31 @@
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import { useFrame } from "react-three-fiber";
 import * as THREE from "three";
+import { gsap } from "gsap";
 
 import five from "../assets/five.png";
 
-const Dice = ({ scale = [1.5, 1.5, 1.5], ...props }) => {
+const Dice = ({ scale = [1, 1, 1], ...props }) => {
   // This reference will give us direct access to the mesh
   const mesh = useRef();
 
   // Set up state for the hovered and active state
   const [active, setActive] = useState(false);
 
-  // Rotate mesh every frame, this is outside of React without overhead
-  useFrame(() => {
-    mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
-  });
+  // // Rotate mesh every frame, this is outside of React without overhead
+  // useFrame(() => {
+  //   mesh.current.rotation.x = mesh.current.rotation.y += 0.01;
+  // });
+
+  useFrame(() => {});
+
+  useEffect(() => {
+    gsap.to(mesh.current.position, {
+      duration: 2.5,
+      ease: "bounce.out",
+      y: -6,
+    });
+  }, []);
 
   const texture = useMemo(() => new THREE.TextureLoader().load(five), []);
 
