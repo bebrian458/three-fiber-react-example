@@ -5,7 +5,7 @@ import { Dice } from "./3d";
 
 const App = () => {
   return (
-    <Canvas>
+    <Canvas camera={{ position: [0, 0, 10] }}>
       <ambientLight intensity={0.5} />
       <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
       <pointLight position={[-10, -10, -10]} />
